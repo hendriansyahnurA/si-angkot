@@ -1,15 +1,15 @@
-@vite('resources/js/orangtua/index.js')
+@vite('resources/js/driver/index.js')
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Orang Tua</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Driver</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createOrangtua">
+                <form id="createDriver">
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">

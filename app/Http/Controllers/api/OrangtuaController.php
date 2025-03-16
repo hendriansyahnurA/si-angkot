@@ -13,8 +13,17 @@ class OrangtuaController extends Controller
 {
     public function index()
     {
-        $Orangtua = OrangTua::all();
-        return Response::json($Orangtua);
+        $Orangtua = OrangTua::get();
+        return Response::json(['data' => $Orangtua]);
+    }
+
+    public function getNotifications(Request $request)
+    {
+        $user = auth()->user();
+
+        return response()->json([
+            'notifications' => $user->notifications,
+        ]);
     }
 
     public function store(Request $request)
@@ -49,24 +58,25 @@ class OrangtuaController extends Controller
             "password" => Hash::make($request->password),
         ]);
 
-        return Response::json(['Orangtua' => $Orangtua], 201);
+        return Response::json(['message' => 'Data Berhasil ditambahkan'], 201);
     }
 
     public function show($id)
     {
         $Orangtua = OrangTua::findOrFail($id);
-        return Response::json(['Orangtua' => $Orangtua]);
+        return Response::json(['data' => $Orangtua]);
     }
-    public function update($id, Request $request)
+
+    public function update(Request $request, $id)
     {
         $validator = Validator::make(
             $request->all(),
             [
                 "nama_lengkap" => "required|string|max:255",
                 "alamat" => "required|string",
-                "no_tlp" => "required|string|min:12|unique:orang_tua",
-                "email" => "required|string|email|unique:orang_tua",
-                "password" => "required|string|min:8",
+                "no_tlp" => "required|string|min:12|unique:orang_tua,no_tlp," . $id,
+                "email" => "required|string|email|unique:orang_tua,email," . $id,
+                "password" => "nullable|string|min:8",
             ],
             [
                 "nama_lengkap" => "Format Tidak Sesuai",
@@ -79,18 +89,27 @@ class OrangtuaController extends Controller
 
         if ($validator->fails()) {
             return Response::json($validator->errors(), 422);
-        }
+        };
 
         $Orangtua = OrangTua::findOrFail($id);
-        $Orangtua->save();
 
-        return Response::json(["Orangtua" => 'Data Orang Tua Berhasil di Update'], 200);
+        $validatedData = $validator->validated();
+
+        if (!empty($validatedData['password'])) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        } else {
+            unset($validatedData['password']);
+        }
+
+        $Orangtua->update($validatedData);
+
+        return Response::json(["message" => 'Data Orang Tua Berhasil di Update'], 201);
     }
 
     public function delete($id)
     {
         $Orangtua = OrangTua::findOrFail($id);
         $Orangtua->delete();
-        return Response::json(["message" => 'Data Orang Tua berhasil dihapus'], 200);
+        return Response::json(["message" => 'Data Orang Tua Berhasil dihapus'], 200);
     }
 }

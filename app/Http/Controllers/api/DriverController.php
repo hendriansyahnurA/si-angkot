@@ -15,7 +15,7 @@ class DriverController extends Controller
     {
         $Driver = Driver::all();
 
-        return Response::json($Driver);
+        return Response::json(['data' => $Driver]);
     }
 
     public function store(Request $request)
@@ -25,8 +25,8 @@ class DriverController extends Controller
             [
                 "nama_lengkap" => "required|string|max:255",
                 "alamat" => "required|string",
-                "no_tlp" => "required|string|min:12|unique:orang_tua",
-                "email" => "required|string|email|unique:orang_tua",
+                "no_tlp" => "required|string|min:12|unique:driver",
+                "email" => "required|string|email|unique:driver",
                 "password" => "required|string|min:8",
             ],
             [
@@ -49,10 +49,52 @@ class DriverController extends Controller
             "password" => Hash::make($request->password),
         ]);
 
-        return Response::json(['Driver' => $Driver], 201);
+        return Response::json(['message' => 'Data Berhasil di Tambahkan'], 201);
     }
 
-    public function show($id) {}
-    public function update($id, Request $request) {}
-    public function delete($id) {}
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "nama_lengkap" => "required|string|max:255",
+                "alamat" => "required|string",
+                "no_tlp" => "required|string|min:12|unique:driver,no_tlp," . $id,
+                "email" => "required|string|email|unique:driver,email," . $id,
+                "password" => "required|string|min:8",
+            ],
+            [
+                "nama_lengkap" => "Format Tidak Sesuai",
+                "alamat" => "Alamat Tidak Sesuai",
+                "no_tlp.unique" => "Nomer Telfon sudah digunakan",
+                "email.unique" => "email sudah digunakan",
+                "password" => "password minimal 8 karakter",
+            ]
+        );
+
+        if ($validator->fails()) {
+            return Response::json($validator->errors(), 422);
+        }
+
+        $Driver = Driver::findOrFail($id);
+
+        $validatedData = $validator->validated();
+
+        if (!empty($validatedData['password'])) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        } else {
+            unset($validatedData['password']);
+        }
+
+        $Driver->update($validatedData);
+
+        return Response::json(["message" => 'Data Driver Berhasil di Update'], 200);
+    }
+
+    public function delete($id)
+    {
+        $Driver = Driver::findOrFail($id);
+        $Driver->delete();
+        return Response::json(['message' => 'Data Driver Berhasil di Hapus'], 200);
+    }
 }

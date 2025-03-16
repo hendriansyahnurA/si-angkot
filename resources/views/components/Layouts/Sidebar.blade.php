@@ -37,8 +37,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Data SI-ANGKOT :</h6>
                 <a class="collapse-item" href="{{ '/orangtua' }}">Data Orang Tua</a>
-                <a class="collapse-item" href="{{ '/admin/alternatif' }}">Data Anak</a>
-                <a class="collapse-item" href="{{ '/admin/alternatif' }}">Data Driver</a>
+                <a class="collapse-item" href="{{ '/anak' }}">Data Anak</a>
+                <a class="collapse-item" href="{{ '/driver' }}">Data Driver</a>
                 <a class="collapse-item" href="{{ '/admin/alternatif' }}">Data Angkot</a>
             </div>
         </div>

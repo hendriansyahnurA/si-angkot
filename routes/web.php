@@ -18,23 +18,19 @@ Route::middleware(["role:admin"])->group(function () {
     $token = session("token");
     return view("dashboard", compact("token"));
   });
+
   Route::get("/orangtua", function () {
     $token = session("token");
     return view("pages.OrangTua", compact("token"));
   });
-});
 
-Route::middleware(["role:admin"])->group(function () {});
-
-Route::middleware(["role:anak"])->group(function () {
   Route::get("/anak", function () {
-    return view("");
+    $token = session("token");
+    return view("pages.Anak", compact("token"));
   });
-});
 
-
-Route::middleware(["auth:sanctum", "role:driver"])->group(function () {
   Route::get("/driver", function () {
-    return view("");
+    $token = session("token");
+    return view("pages.Driver", compact("token"));
   });
 });

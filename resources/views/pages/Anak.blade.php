@@ -1,28 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'OrangTua')
-@section('header-title', 'Orang Tua')
+@section('title', 'Anak')
+@section('header-title', 'Anak')
 @section('content')
     <div class="card shadow mb-4">
-        <!-- Button trigger modal -->
         <div class="card-header py-3">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Tambah Data
             </button>
         </div>
         <div class="card-body">
-            {{-- <form method="GET" action="" class="mb-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Cari berdasarkan nama"
-                        value="{{ request()->input('search') }}">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </form> --}}
-
             <div class="table-responsive">
                 <div id="loading" style="display: none;">
                     <p>Loading data...</p>
@@ -33,10 +20,14 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
+                                <th>Nama Siswa</th>
+                                <th>NISN</th>
+                                <th>Nama Orang Tua</th>
                                 <th>No Telfon</th>
-                                <th>email</th>
-                                <th style="width: 25%">Alamat</th>
+                                <th>Sekolah</th>
+                                <th>Email</th>
+                                <th>Alamat Sekolah</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -53,6 +44,6 @@
                 </div>
             </div>
         </div>
-        @include('components.modal.modal-orangtua')
+        @include('components.modal.modal-Anak')
     </div>
 @endsection

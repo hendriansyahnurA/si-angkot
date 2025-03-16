@@ -1,26 +1,47 @@
-@vite('resources/js/orangtua/index.js')
+@vite('resources/js/anak/index.js')
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Orang Tua</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Anak</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="createOrangtua">
+                <form id="createAnak">
                     @csrf
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        <label for="user_id">Nama Orang Tua</label>
+                        <select class="form-select" id="user_id" aria-label="Default select example">
+                            <option selected disabled>Pilih Orang Tua</option>
+
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="nama_lengkap">Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" required
                             placeholder="Nama Lengkap">
                     </div>
                     <div class="form-group">
+                        <label for="nisn">NISN</label>
+                        <input type="text" class="form-control" id="nisn" name="nisn" required
+                            placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
                         <label for="no_tlp">No Telfon</label>
                         <input type="number" class="form-control" id="no_tlp" name="no_tlp" required
                             placeholder="No Telfon">
+                    </div>
+                    <div class="form-group">
+                        <label for="sekolah">Sekolah</label>
+                        <input type="text" class="form-control" id="sekolah" name="sekolah" required
+                            placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat_sekolah">Alamat Sekolah</label>
+                        <textarea class="form-control" id="alamat_sekolah" name="alamat_sekolah" required placeholder="Alamat Lengkap"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -31,10 +52,6 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required
                             placeholder="**********">
-                    </div>
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <textarea class="form-control" id="alamat" name="alamat" required placeholder="Alamat Lengkap"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>

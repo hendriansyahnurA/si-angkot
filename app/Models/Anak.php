@@ -15,10 +15,11 @@ class Anak extends Model
         "no_tlp",
         "email",
         "password",
-        "user_id"
+        "user_id",
+        "status"
     ];
-    public function OrangTua()
+    public function orangtua()
     {
-        return $this->belongsTo(OrangTua::class);
+        return $this->belongsTo(OrangTua::class, 'user_id', 'id');
     }
 }

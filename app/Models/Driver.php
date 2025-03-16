@@ -9,7 +9,7 @@ class Driver extends Model
     protected $table = "driver";
     protected $fillable = [
         "nama_lengkap",
-        "Alamat",
+        "alamat",
         "no_tlp",
         "email",
         "password",

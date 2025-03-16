@@ -18,11 +18,21 @@
     </form>
 
 
+
+
+
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown">
+                🔔 <span id="notif-badge" class="badge bg-danger">0</span>
+            </a>
+            <ul class="dropdown-menu" id="notification-list">
+                <li class="dropdown-item text-center">Memuat...</li>
+            </ul>
+        </li>
         <div class="topbar-divider d-none d-sm-block"></div>
-
-        <li class="nav-item dropdown no-arrow">
+        <li class="nav-item dropdown no-arrow" style="right: 15px">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-user fa-sm"></i>

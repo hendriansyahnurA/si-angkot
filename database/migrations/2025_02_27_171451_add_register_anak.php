@@ -24,7 +24,7 @@ return new class extends Migration
 
 
             $table->unsignedBigInteger("user_id");
-            $table->enum('status', ['setuju', 'tidak setuju'])->default('tidak setuju');
+            $table->enum('status', ['Pending', 'Verified', 'Rejected'])->default('Pending');
             $table->foreign('user_id')->on('orang_tua')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
